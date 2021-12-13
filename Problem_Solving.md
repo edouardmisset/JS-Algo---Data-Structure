@@ -37,7 +37,7 @@
 
 ```javascript
 // Naive approach
-const sum = (a, b) => a + b
+const sum = (a, b) => a + b;
 ```
 
 ### Explore Concrete Example
@@ -56,13 +56,13 @@ const sum = (a, b) => a + b
 
 ```javascript
 // What shape should our object be?
-charCount('aabbcc') // {a: 2, b: 2, c: 2}
+charCount('aabbcc'); // {a: 2, b: 2, c: 2}
 // How should we count capital letters? (case-insensitive)
-charCount('miSSissippi') // {m: 1, i: 4, s: 4, p: 2}
+charCount('miSSissippi'); // {m: 1, i: 4, s: 4, p: 2}
 // Should we count the spaces?
-charCount('a b c') // {a: 1, b: 1, c: 1}
+charCount('a b c'); // {a: 1, b: 1, c: 1}
 // Should we count numbers? null? undefined?
-charCount('a1b2c3') // {a: 1, b: 2, c: 3}
+charCount('a1b2c3'); // {a: 1, b: 2, c: 3}
 ```
 
 ### Break it Down
@@ -95,18 +95,18 @@ function charCount(str) {
 
 ```javascript
 function charCount(str) {
-  var obj = {}
+  var obj = {};
   for (var i = 0; i < str.length; i++) {
-    var char = str[i].toLowerCase()
+    var char = str[i].toLowerCase();
     if (/[a-z0-9]/.test(char)) {
       if (obj[char] > 0) {
-        obj[char]++
+        obj[char]++;
       } else {
-        obj[char] = 1
+        obj[char] = 1;
       }
     }
   }
-  return obj
+  return obj;
 }
 ```
 
@@ -124,23 +124,23 @@ Refactoring questions:
 
 ```javascript
 function charCount(str) {
-  const obj = {}
+  const obj = {};
   for (let char of str) {
     if (isAlphaNumeric(char)) {
-      char = char.toLowerCase()
-      obj[char] = ++obj[char] || 1
+      char = char.toLowerCase();
+      obj[char] = ++obj[char] || 1;
     }
   }
-  return obj
+  return obj;
 }
 
 function isAlphaNumeric(char) {
-  const code = char.charCodeAt(0)
+  const code = char.charCodeAt(0);
   return (
     !(code > 47 && code < 58) && // numeric (0-9)
     !(code > 64 && code < 91) && // upper alpha (A-Z)
     !(code > 96 && code < 123) // lower alpha (a-z)
-  )
+  );
 }
 ```
 
@@ -167,31 +167,31 @@ This can often avoid the need for nested loops or O(N^2) operations with arrays 
 `Write a function called same, which accepts two arrays. The function should return true if every value in the array has its corresponding value squared in the second array. The frequency of values must be the same.`
 
 ```javascript
-same([1, 2, 3], [4, 1, 9]) // true
-same([1, 2, 3], [1, 9]) // false
-same([1, 2, 1], [4, 4, 1]) // false
+same([1, 2, 3], [4, 1, 9]); // true
+same([1, 2, 3], [1, 9]); // false
+same([1, 2, 1], [4, 4, 1]); // false
 
 function same(arr1, arr2) {
   if (arr1.length !== arr2.length) {
-    return false
+    return false;
   }
-  const frequencyCounter1 = {}
-  const frequencyCounter2 = {}
+  const frequencyCounter1 = {};
+  const frequencyCounter2 = {};
   for (let val of arr1) {
-    frequencyCounter1[val] = ++frequencyCounter1[val] || 1
+    frequencyCounter1[val] = ++frequencyCounter1[val] || 1;
   }
   for (let val of arr2) {
-    frequencyCounter2[val] = ++frequencyCounter2[val] || 1
+    frequencyCounter2[val] = ++frequencyCounter2[val] || 1;
   }
   for (let key in frequencyCounter1) {
     if (!(key ** 2 in frequencyCounter2)) {
-      return false
+      return false;
     }
     if (frequencyCounter2[key ** 2] !== frequencyCounter1[key]) {
-      return false
+      return false;
     }
   }
-  return true
+  return true;
 }
 // O(n) time and O(n) space
 ```
@@ -208,17 +208,17 @@ Very efficient for solving problems with minimal space complexity as well
 
 ```javascript
 function sumZero(arr) {
-  let left = 0
-  let right = arr.length - 1
+  let left = 0;
+  let right = arr.length - 1;
   while (left < right) {
-    let sum = arr[left] + arr[right]
+    let sum = arr[left] + arr[right];
     if (sum === 0) {
-      return [left, right]
+      return [left, right];
     }
     if (sum > 0) {
-      right--
+      right--;
     } else {
-      left++
+      left++;
     }
   }
 }
@@ -237,25 +237,25 @@ Very useful for keeping track of a subset of data in an array/string etc.
 `Write a function called maxSubarraySum which accepts an array of integers and a number called n. The function should calculate the maximum sum of n consecutive elements in the array.`
 
 ```javascript
-maxSubarraySum([1, 2, 5, 2, 8, 1, 5], 2) // 10
-maxSubarraySum([1, 2, 5, 2, 8, 1, 5], 4) // 17
-maxSubarraySum([4, 2, 1, 6], 1) // 6
-maxSubarraySum([4, 2, 1, 6, 2], 4) // 13
-maxSubarraySum([], 4) // null
+maxSubarraySum([1, 2, 5, 2, 8, 1, 5], 2); // 10
+maxSubarraySum([1, 2, 5, 2, 8, 1, 5], 4); // 17
+maxSubarraySum([4, 2, 1, 6], 1); // 6
+maxSubarraySum([4, 2, 1, 6, 2], 4); // 13
+maxSubarraySum([], 4); // null
 
-function maxSubarraySum(array, numberOfDigitToASum) {
-  if (array < numberOfDigitToASum) return null
-  let maxSum = 0
-  let tempSum = 0
-  for (let index = 0; index < numberOfDigitToASum; index++) {
-    maxSum += array[index]
+function maxSubarraySum(array, numberOfDigitToSum) {
+  if (array < numberOfDigitToSum) return null;
+  let maxSum = 0;
+  let tempSum = 0;
+  for (let index = 0; index < numberOfDigitToSum; index++) {
+    maxSum += array[index];
   }
-  tempSum = maxSum
-  for (let i = numberOfDigitToASum; i < array.length; i++) {
-    tempSum = tempSum - array[i - numberOfDigitToASum] + array[i]
-    maxSum = Math.max(maxSum, tempSum)
+  tempSum = maxSum;
+  for (let i = numberOfDigitToSum; i < array.length; i++) {
+    tempSum = tempSum - array[i - numberOfDigitToSum] + array[i];
+    maxSum = Math.max(maxSum, tempSum);
   }
-  return maxSum
+  return maxSum;
 }
 ```
 
@@ -270,27 +270,27 @@ This pattern can tremendously decrease time complexity.
 `Given a sorted array of integers, write a function called search, that accepts a value and returns the index where the value passed to the function is located. If the value is not found, return -1.`
 
 ```javascript
-binarySearch([1, 2, 3, 4, 5, 6], 4) // 3
-binarySearch([1, 2, 3, 4, 5, 6], 6) // 5
-binarySearch([1, 2, 3, 4, 5, 6], 11) // -1
-binarySearch([], 1) // -1
+binarySearch([1, 2, 3, 4, 5, 6], 4); // 3
+binarySearch([1, 2, 3, 4, 5, 6], 6); // 5
+binarySearch([1, 2, 3, 4, 5, 6], 11); // -1
+binarySearch([], 1); // -1
 
 // Use a dicotomy approach
 function binarySearch(sortedArray = [], numberToFind) {
-  let min = 0
-  let max = sortedArray.length - 1
+  let min = 0;
+  let max = sortedArray.length - 1;
   while (min <= max) {
-    const middle = Math.floor(max + min / 2)
-    const currentElement = sortedArray[middle]
+    const middle = Math.floor(max + min / 2);
+    const currentElement = sortedArray[middle];
     if (currentElement < numberToFind) {
-      min = middle + 1
+      min = middle + 1;
     } else if (currentElement > numberToFind) {
-      max = middle - 1
+      max = middle - 1;
     } else {
-      return middle
+      return middle;
     }
   }
-  return -1
+  return -1;
 }
 
 // Time Complexity: O(log(N)) || Space Complexity: O(1)
