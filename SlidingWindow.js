@@ -4,17 +4,19 @@ maxSubarraySum([4, 2, 1, 6], 1) // 6
 maxSubarraySum([4, 2, 1, 6, 2], 4) // 13
 maxSubarraySum([], 4) // null
 
-function maxSubarraySum(array, numberOfDigitToASum) {
-  if (array < numberOfDigitToASum) return null
+function maxSubarraySum(array, numberOfDigitToSum) {
+  if (array < numberOfDigitToSum) return null
   let maxSum = 0
   let tempSum = 0
-  for (let index = 0; index < numberOfDigitToASum; index++) {
+  for (let index = 0; index < numberOfDigitToSum; index++) {
     maxSum += array[index]
   }
   tempSum = maxSum
-  for (let i = numberOfDigitToASum; i < array.length; i++) {
-    tempSum = tempSum - array[i - numberOfDigitToASum] + array[i]
+  for (let i = numberOfDigitToSum; i < array.length; i++) {
+    tempSum = tempSum - array[i - numberOfDigitToSum] + array[i]
     maxSum = Math.max(maxSum, tempSum)
   }
   return maxSum
 }
+
+// Time complexity: O(n). Space Complexity: O(1)
