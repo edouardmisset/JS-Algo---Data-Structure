@@ -58,3 +58,9 @@ function flatten(arr) {
 }
 
 console.log(flatten([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]]))
+
+
+// capitalizeFirst(['car','taco','banana']); // ['Car','Taco','Banana']
+const capitalizeFirst = (arrayOfStrings) => arrayOfStrings.map(string => string[0].toUpperCase() + string.slice(1))
+
+console.log(capitalizeFirst(['car', 'taco', 'banana']))
