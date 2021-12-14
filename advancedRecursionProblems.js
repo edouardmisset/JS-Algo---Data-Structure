@@ -64,3 +64,46 @@ console.log(flatten([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]]))
 const capitalizeFirst = (arrayOfStrings) => arrayOfStrings.map(string => string[0].toUpperCase() + string.slice(1))
 
 console.log(capitalizeFirst(['car', 'taco', 'banana']))
+
+
+
+function nestedEvenSum(object) {
+  const sum = { result: 0 }
+  for (const key in object) {
+    const value = object[key];
+    if (typeof value === 'number' && value % 2 === 0) {
+      sum.result += value
+    } else if (value.constructor === Object && Object.keys(value).length !== 0) {
+      sum.result += nestedEvenSum({ ...value }).result
+    }
+  }
+  return sum
+}
+
+const obj1 = {
+  outer: 2,
+  obj: {
+    inner: 2,
+    otherObj: {
+      superInner: 2,
+      notANumber: true,
+      alsoNotANumber: "yup"
+    }
+  }
+}
+
+const obj2 = {
+  a: 2,
+  b: { b: 2, bb: { b: 3, bb: { b: 2 } } },
+  c: { c: { c: 2 }, cc: 'ball', ccc: 5 },
+  d: 1,
+  e: { e: { e: 2 }, ee: 'car' }
+};
+
+const obj3 = {
+  a: 2,
+  b: { b: 2 },
+};
+
+console.log(nestedEvenSum(obj1)) // 6
+console.log(nestedEvenSum(obj2)) // 10
