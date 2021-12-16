@@ -1,4 +1,7 @@
 {
   "prettier.semi": true,
   "js-codeformer.useSemicolons": true,
+  "standard.enable": true,
+  "standard.run": "onSave",
+  "standard.autoFixOnSave": true,
 }
