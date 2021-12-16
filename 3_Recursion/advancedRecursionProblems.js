@@ -107,3 +107,16 @@ const obj3 = {
 
 console.log(nestedEvenSum(obj1)) // 6
 console.log(nestedEvenSum(obj2)) // 10
+
+
+const capitalizeWords = (arrayOfStrings) => arrayOfStrings.map(string => string.toUpperCase())
+function capitalizeWordsRecusively(array) {
+  if (array.length === 1) {
+    return [array[0].toUpperCase()];
+  }
+  let result = capitalizeWords(array.slice(0, -1));
+  result.push(array.slice(array.length - 1)[0].toUpperCase());
+  return result;
+}
+
+console.log(capitalizeWordsRecusively(['i', 'am', 'learning', 'recursion']))
