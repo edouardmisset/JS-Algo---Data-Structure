@@ -59,7 +59,7 @@ function collectOddValues(arr) {
 
 // Pure recursion
 function collectOddValues2(arr) {
-  let newArr = []
+  const newArr = []
   if (arr.length === 0) return newArr
   const [first, ...rest] = arr
   if (first % 2 !== 0) {
