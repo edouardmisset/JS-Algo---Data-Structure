@@ -9,4 +9,6 @@ function stringSeach(shortString = '', longString = '') {
   return count
 }
 
+// Time Complexity - O(N^2) ??? | Space Complexity - O(1)
+
 console.log(stringSeach('o', 'wowowomgomg'))
