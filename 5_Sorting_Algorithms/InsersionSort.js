@@ -1,11 +1,16 @@
 
 function insertionSort(arr) {
-  // Swapping logique
-  // Just numerical comparaison here
-  const swap = (arr, index1, index2) => [arr[index1], arr[index2]] = [arr[index2], arr[index1]]
-
-
+  for (let i = 1; i < arr.length; i++) {
+    const currentValue = arr[i]
+    let j = i - 1
+    for (j; j >= 0 && arr[j] > currentValue; j--) {
+      arr[j + 1] = arr[j]
+    }
+    arr[j + 1] = currentValue
+  }
   return arr
 }
 
-console.log(insertionSort([7, 3, 5, 1]))
+// Time Complexity - O(N^2) | Space Complexity - O(1)
+
+console.log(insertionSort([7, 3, 5, 1, 4]))
