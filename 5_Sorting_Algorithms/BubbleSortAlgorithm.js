@@ -12,17 +12,27 @@ function historicalSwap(arr, index1, index2) {
   arr[index2] = temp
 }
 
-const swap = (arr, index1, index2) => [arr[index1], arr[index2]] = [arr[index2], arr[index1]]
-
 function bubbleSort(arr) {
+  // Swapping logique
+  // Just numerical comparaison here
+  const swap = (arr, index1, index2) => [arr[index1], arr[index2]] = [arr[index2], arr[index1]]
+  // Short-circuit variable to exit the loop in case no swaps have been made
+  // which means the array is sorted
+  let noSwaps = false
+
   for (let i = arr.length; i > 0; i--) {
+    noSwaps = true
     for (let j = 0; j < i - 1; j++) {
-      if (arr[j] > arr[j + 1]) swap(arr, j, j + 1)
+      if (arr[j] > arr[j + 1]) {
+        swap(arr, j, j + 1)
+        noSwaps = false
+      }
     }
+    if (noSwaps) break
   }
   return arr
 }
 
-// Time Complexity - O(N!) ??? | Space Complexity - O(1)
+// Time Complexity - O(N^2) | Space Complexity - O(1)
 
 console.log(bubbleSort(someOtherArray))
