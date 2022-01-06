@@ -23,14 +23,14 @@ function mergeArray(arr1, arr2) {
 }
 
 function mergeSort(arr) {
-  if (arr.length <= 1) {
-    return arr;
-  }
+  if (arr.length <= 1) return arr
   const middle = Math.floor(arr.length / 2);
   const leftArray = mergeSort(arr.slice(0, middle));
   const rightArray = mergeSort(arr.slice(middle));
   return mergeArray(leftArray, rightArray);
 }
+
+// Time Complexity - O(N log(N)) | Space Complexity - O(N)
 
 console.log(mergeArray([1, 4, 6], [2, 8, 10, 12]));
 console.log(mergeSort([13, 40, 36, 10, 8, 46, 2]));
