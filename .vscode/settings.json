@@ -4,4 +4,7 @@
   "standard.enable": true,
   "standard.run": "onSave",
   "standard.autoFixOnSave": true,
+  "deno.enable": true,
+  "deno.lint": true,
+  "deno.unstable": false,
 }
