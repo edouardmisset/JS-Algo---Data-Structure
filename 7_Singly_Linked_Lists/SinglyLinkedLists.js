@@ -146,7 +146,7 @@ var SinglyLinkedList = /** @class */ (function () {
     return SinglyLinkedList;
 }());
 // Time Complexity:
-// Insertion: O(1)
+// ! Insertion: O(1)
 // Removal: O(1) or O(N)
 // Searching: O(N)
 // Accessing: O(N)
