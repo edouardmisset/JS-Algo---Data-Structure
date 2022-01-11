@@ -75,18 +75,12 @@ class SinglyLinkedList {
     return this;
   }
 
-  // public get value() : string {
-  //   return
-  // }
-
   get(index: number): ListNode | undefined | null {
     if (index < 0 || index >= this.length) return undefined;
     let currentNode = this.head;
     for (let i = 0; i < index; i++) {
       if (currentNode?.next) {
         currentNode = currentNode.next;
-      } else {
-        return undefined;
       }
     }
     return currentNode;
@@ -102,9 +96,9 @@ class SinglyLinkedList {
   }
 
   insert(value: value, index: number): boolean {
-    if (index === this.length) return !!this.push(value);
-    if (index === 0) return !!this.unshift(value);
     if (index < 0 || index > this.length) return false;
+    if (index === 0) return !!this.unshift(value);
+    if (index === this.length) return !!this.push(value);
 
     const newNode = new ListNode(value);
     const previousNode = this.get(index - 1);
@@ -118,22 +112,20 @@ class SinglyLinkedList {
   }
 
   remove(index: number): undefined | ListNode | null {
-    if (index === this.length - 1) return this.pop();
-    if (index === 0) return this.shift();
     if (index < 0 || index > this.length) return undefined;
+    if (index === 0) return this.shift();
+    if (index === this.length - 1) return this.pop();
 
     const previousNode = this.get(index - 1);
     if (previousNode) {
       const nodeToRemove = previousNode.next;
       if (nodeToRemove) {
         previousNode.next = nodeToRemove.next;
-        nodeToRemove.next = null; // Is it necessary ?
-        // Is it a problem to have two nodes pointing to a single node ?
+        nodeToRemove.next = null;
       }
+      this.length--;
       return nodeToRemove;
     }
-    this.length--;
-    return undefined;
   }
 
   reverse(): this {
