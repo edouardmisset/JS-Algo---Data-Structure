@@ -1,13 +1,17 @@
+"use strict";
 // Piece of data - value
 // Reference to the next node - next
+exports.__esModule = true;
 var ListNode = /** @class */ (function () {
     function ListNode(value) {
         this.value = value;
         this.value = value;
         this.next = null;
+        this.previous = null;
     }
     return ListNode;
 }());
+exports.ListNode = ListNode;
 var SinglyLinkedList = /** @class */ (function () {
     function SinglyLinkedList() {
         this.head = null;
@@ -69,9 +73,6 @@ var SinglyLinkedList = /** @class */ (function () {
         this.length++;
         return this;
     };
-    // public get value() : string {
-    //   return
-    // }
     SinglyLinkedList.prototype.get = function (index) {
         if (index < 0 || index >= this.length)
             return undefined;
@@ -79,9 +80,6 @@ var SinglyLinkedList = /** @class */ (function () {
         for (var i = 0; i < index; i++) {
             if (currentNode === null || currentNode === void 0 ? void 0 : currentNode.next) {
                 currentNode = currentNode.next;
-            }
-            else {
-                return undefined;
             }
         }
         return currentNode;
@@ -95,12 +93,12 @@ var SinglyLinkedList = /** @class */ (function () {
         return false;
     };
     SinglyLinkedList.prototype.insert = function (value, index) {
-        if (index === this.length)
-            return !!this.push(value);
-        if (index === 0)
-            return !!this.unshift(value);
         if (index < 0 || index > this.length)
             return false;
+        if (index === 0)
+            return !!this.unshift(value);
+        if (index === this.length)
+            return !!this.push(value);
         var newNode = new ListNode(value);
         var previousNode = this.get(index - 1);
         if (previousNode) {
@@ -112,24 +110,22 @@ var SinglyLinkedList = /** @class */ (function () {
         return true;
     };
     SinglyLinkedList.prototype.remove = function (index) {
-        if (index === this.length - 1)
-            return this.pop();
-        if (index === 0)
-            return this.shift();
         if (index < 0 || index > this.length)
             return undefined;
+        if (index === 0)
+            return this.shift();
+        if (index === this.length - 1)
+            return this.pop();
         var previousNode = this.get(index - 1);
         if (previousNode) {
             var nodeToRemove = previousNode.next;
             if (nodeToRemove) {
                 previousNode.next = nodeToRemove.next;
-                nodeToRemove.next = null; // Is it necessary ?
-                // Is it a problem to have two nodes pointing to a single node ?
+                nodeToRemove.next = null;
             }
+            this.length--;
             return nodeToRemove;
         }
-        this.length--;
-        return undefined;
     };
     SinglyLinkedList.prototype.reverse = function () {
         var currentNode = this.head;
@@ -149,6 +145,11 @@ var SinglyLinkedList = /** @class */ (function () {
     };
     return SinglyLinkedList;
 }());
+// Time Complexity:
+// Insertion: O(1)
+// Removal: O(1) or O(N)
+// Searching: O(N)
+// Accessing: O(N)
 // const list = new SinglyLinkedList();
 // list.push('HELLO');
 // list.push('Goodbye');

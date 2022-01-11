@@ -1,15 +1,17 @@
 // Piece of data - value
 // Reference to the next node - next
 
-class ListNode {
+export class ListNode {
   public next: ListNode | null;
+  public previous: ListNode | null;
   constructor(public value: value) {
     this.value = value;
     this.next = null;
+    this.previous = null;
   }
 }
 
-type value = number | string;
+export type value = number | string;
 
 class SinglyLinkedList {
   public head: ListNode | null;
@@ -148,7 +150,7 @@ class SinglyLinkedList {
 }
 
 // Time Complexity:
-// Insertion: O(1)
+// ! Insertion: O(1)
 // Removal: O(1) or O(N)
 // Searching: O(N)
 // Accessing: O(N)

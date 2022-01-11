@@ -1,14 +1,4 @@
-class ListNode {
-  public next: ListNode | null;
-  public previous: ListNode | null;
-  constructor(public value: value) {
-    this.value = value;
-    this.next = null;
-    this.previous = null;
-  }
-}
-
-type value = number | string;
+import { ListNode, value } from '../7_Singly_Linked_Lists/SinglyLinkedLists.ts'
 
 class DoublyLinkedList {
   public head: ListNode | null;
@@ -170,8 +160,8 @@ class DoublyLinkedList {
 }
 
 // Time Complexity:
-// Insertion: O(1)
-// Removal: O(1)
+// ! Insertion: O(1)
+// ! Removal: O(1)
 // Searching: O(N)
 // Accessing: O(N)
 
