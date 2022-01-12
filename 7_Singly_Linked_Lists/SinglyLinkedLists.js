@@ -150,8 +150,8 @@ var SinglyLinkedList = /** @class */ (function () {
 // Removal: O(1) or O(N)
 // Searching: O(N)
 // Accessing: O(N)
-// const list = new SinglyLinkedList();
-// list.push('HELLO');
-// list.push('Goodbye');
-// list.reverse();
-// console.log(list);
+var list = new SinglyLinkedList();
+list.push('HELLO');
+list.push('Goodbye');
+list.reverse();
+console.log(list);

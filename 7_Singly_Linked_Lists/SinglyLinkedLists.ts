@@ -155,8 +155,8 @@ class SinglyLinkedList {
 // Searching: O(N)
 // Accessing: O(N)
 
-// const list = new SinglyLinkedList();
-// list.push('HELLO');
-// list.push('Goodbye');
-// list.reverse();
-// console.log(list);
+const list = new SinglyLinkedList();
+list.push('HELLO');
+list.push('Goodbye');
+list.reverse();
+console.log(list);
