@@ -15,7 +15,7 @@ export class TreeNode {
   }
 }
 
-class BinarySearchTree {
+export class BinarySearchTree {
   public root: TreeNode | null
   constructor() {
     this.root = null
