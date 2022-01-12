@@ -126,6 +126,29 @@ export class BinarySearchTree {
     return data;
   }
 
+  isBalanced(): boolean {
+    if (!this.root) return true;
+
+    function checkHeight(node: TreeNode | null): boolean | number {
+      if (!node) return 0;
+      const left = checkHeight(node.left);
+      const right = checkHeight(node.right);
+      // if a previous call has returned false,
+      // we need to pass false all the way up
+      if (
+        left === false ||
+        right === false ||
+        Math.abs(Number(left) - Number(right)) > 1
+      ) {
+        return false;
+      }
+      // height of a node
+      return Math.max(Number(left), Number(right)) + 1;
+    }
+
+    return checkHeight(this.root) !== false;
+  }
+
 }
 
 // Time Complexity:
