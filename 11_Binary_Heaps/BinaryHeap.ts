@@ -93,6 +93,11 @@ class MaxBinaryHeap {
   }
 }
 
+// Time Complexity:
+// Insertion: O(log N)
+// Removal: O(log N)
+// Searching: O(N)
+
 const heap = new MaxBinaryHeap();
 heap.insert(41);
 heap.insert(39);

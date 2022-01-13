@@ -96,6 +96,11 @@ class PriorityQueue {
   }
 }
 
+// Time Complexity:
+// Insertion: O(log N)
+// Removal: O(log N)
+// Searching: O(N)
+
 const prioQ = new PriorityQueue();
 prioQ.enqueue('common cold', 5);
 prioQ.enqueue('high fever', 3);
