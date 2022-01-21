@@ -57,20 +57,20 @@ class Graph {
   }
 
   depthFirstSearchIterative(startingVertex = 'A'): string[] {
-    const stack = []
-    stack.push(startingVertex)
-    const result = []
-    const visited: string[] = []
+    const stack = [startingVertex]
+    const result: string[] = []
+    const visited: any = { startingVertex: true }
+    let currentVertex: string | undefined
+
     while (stack.length > 0) {
-      const vertex = stack.pop()
-      if (vertex && !visited.includes(vertex)) {
-        result.push(vertex)
-        visited.push(vertex)
-        this.adjacencyList[vertex].forEach((neighbor: string): number => stack.push(neighbor)
+      currentVertex = stack.pop()
+      if (currentVertex && !visited[currentVertex]) {
+        result.push(currentVertex)
+        visited[currentVertex] = true
+        this.adjacencyList[currentVertex].forEach((neighbor: string): number => stack.push(neighbor)
         );
       }
     }
-
     return result
   }
 }
@@ -93,4 +93,5 @@ graph.addEdge('D', 'F');
 graph.addEdge('E', 'F');
 console.log(graph.adjacencyList);
 
+console.log(graph.depthFirstSearchRecursive('A'));
 console.log(graph.depthFirstSearchIterative('A'));
