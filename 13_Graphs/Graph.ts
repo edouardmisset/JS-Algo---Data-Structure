@@ -73,6 +73,30 @@ class Graph {
     }
     return result
   }
+
+  breadthFirstSearch(startingVertex = 'A'): string[] {
+    const queue = [startingVertex]
+    const result: string[] = []
+    const visited: any = { startingVertex: true }
+    let currentVertex: string | undefined
+
+    while (queue.length > 0) {
+      currentVertex = queue.shift()
+      if (currentVertex) {
+        result.push(currentVertex)
+        visited[currentVertex] = true
+
+        this.adjacencyList[currentVertex].forEach((neighbor: string): void => {
+          if (!visited[neighbor]) {
+            queue.push(neighbor)
+            visited[neighbor] = true
+          }
+        }
+        );
+      }
+    }
+    return result
+  }
 }
 
 const graph = new Graph();
@@ -95,3 +119,4 @@ console.log(graph.adjacencyList);
 
 console.log(graph.depthFirstSearchRecursive('A'));
 console.log(graph.depthFirstSearchIterative('A'));
+console.log(graph.breadthFirstSearch('A'));
