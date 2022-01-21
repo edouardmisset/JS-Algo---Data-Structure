@@ -39,24 +39,41 @@ class Graph {
     );
     delete this.adjacencyList[vertex];
   }
+
+  depthFirstSearchRecursive(startingVertex = 'A'): undefined | string[] {
+    const result: string[] = [];
+    const visited: any = {};
+
+    const DFSHelper = (vertex: string) => {
+      if (!vertex) return null;
+      visited[vertex] = true;
+      result.push(vertex);
+      this.adjacencyList[vertex].forEach((neighbor: string) =>
+        !visited[neighbor] ? DFSHelper(neighbor) : undefined
+      );
+    };
+    DFSHelper(startingVertex);
+
+    return result;
+  }
 }
 
 const graph = new Graph();
 
-graph.addVertex('Tokyo');
-graph.addVertex('Dallas');
-graph.addVertex('Aspen');
-graph.addVertex('Los Angeles');
-graph.addVertex('Hong Kong');
+graph.addVertex('A');
+graph.addVertex('B');
+graph.addVertex('C');
+graph.addVertex('D');
+graph.addVertex('E');
+graph.addVertex('F');
+
+graph.addEdge('A', 'B');
+graph.addEdge('A', 'C');
+graph.addEdge('B', 'D');
+graph.addEdge('C', 'E');
+graph.addEdge('D', 'E');
+graph.addEdge('D', 'F');
+graph.addEdge('E', 'F');
 console.log(graph.adjacencyList);
 
-graph.addEdge('Dallas', 'Tokyo');
-graph.addEdge('Dallas', 'Aspen');
-graph.addEdge('Tokyo', 'Aspen');
-graph.addEdge('Dallas', 'Los Angeles');
-graph.addEdge('Dallas', 'Hong Kong');
-console.log(graph.adjacencyList);
-graph.removeEdge('Dallas', 'Aspen');
-graph.removeVertex('Dallas');
-
-console.log(graph.adjacencyList);
+console.log(graph.depthFirstSearchRecursive('A'));
