@@ -40,7 +40,7 @@ class Graph {
     delete this.adjacencyList[vertex];
   }
 
-  depthFirstSearchRecursive(startingVertex = 'A'): undefined | string[] {
+  depthFirstSearchRecursive(startingVertex = 'A'): string[] {
     const result: string[] = [];
     const visited: any = {};
 
@@ -53,8 +53,25 @@ class Graph {
       );
     };
     DFSHelper(startingVertex);
-
     return result;
+  }
+
+  depthFirstSearchIterative(startingVertex = 'A'): string[] {
+    const stack = []
+    stack.push(startingVertex)
+    const result = []
+    const visited: string[] = []
+    while (stack.length > 0) {
+      const vertex = stack.pop()
+      if (vertex && !visited.includes(vertex)) {
+        result.push(vertex)
+        visited.push(vertex)
+        this.adjacencyList[vertex].forEach((neighbor: string): number => stack.push(neighbor)
+        );
+      }
+    }
+
+    return result
   }
 }
 
@@ -76,4 +93,4 @@ graph.addEdge('D', 'F');
 graph.addEdge('E', 'F');
 console.log(graph.adjacencyList);
 
-console.log(graph.depthFirstSearchRecursive('A'));
+console.log(graph.depthFirstSearchIterative('A'));
