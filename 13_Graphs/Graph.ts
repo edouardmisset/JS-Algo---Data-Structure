@@ -13,18 +13,18 @@ class Graph {
     this.adjacencyList = {};
   }
 
-  addVertex(vertex: string): void {
+  public addVertex(vertex: string): void {
     // TODO: Should check if the vertex already exists and return a warning | Error handling
     if (!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];
   }
 
-  addEdge(vertex1: string, vertex2: string): void {
+  public addEdge(vertex1: string, vertex2: string): void {
     // TODO Error handling
     this.adjacencyList[vertex1].push(vertex2);
     this.adjacencyList[vertex2].push(vertex1);
   }
 
-  removeEdge(vertex1: string, vertex2: string): void {
+  public removeEdge(vertex1: string, vertex2: string): void {
     // TODO Error handling
     this.adjacencyList[vertex1] = this.adjacencyList[vertex1].filter(
       (vertex: string): boolean => vertex !== vertex2
@@ -34,14 +34,14 @@ class Graph {
     );
   }
 
-  removeVertex(vertex: string): void {
+  public removeVertex(vertex: string): void {
     this.adjacencyList[vertex].forEach((edge: string): void =>
       this.removeEdge(edge, vertex)
     );
     delete this.adjacencyList[vertex];
   }
 
-  depthFirstSearchRecursive(startingVertex = 'A'): string[] {
+  public depthFirstSearchRecursive(startingVertex = 'A'): string[] {
     const result: string[] = [];
     const visited: any = {};
 
@@ -57,7 +57,7 @@ class Graph {
     return result;
   }
 
-  depthFirstSearchIterative(startingVertex = 'A'): string[] {
+  public depthFirstSearchIterative(startingVertex = 'A'): string[] {
     const stack = [startingVertex]
     const result: string[] = []
     const visited: any = { startingVertex: true }
@@ -75,7 +75,7 @@ class Graph {
     return result
   }
 
-  breadthFirstSearch(startingVertex = 'A'): string[] {
+  public breadthFirstSearch(startingVertex = 'A'): string[] {
     const queue = [startingVertex]
     const result: string[] = []
     const visited: any = { startingVertex: true }
@@ -127,12 +127,65 @@ class WeightedGraph {
   constructor() {
     this.adjacencyList = {};
   }
-  addVertex(vertex: string) {
+  public addVertex(vertex: string) {
     if (!this.adjacencyList[vertex]) this.adjacencyList[vertex] = []
   }
-  addEdge(vertex1: string, vertex2: string, weight: number) {
+  public addEdge(vertex1: string, vertex2: string, weight: number) {
     this.adjacencyList[vertex1].push({ node: vertex2, weight });
     this.adjacencyList[vertex2].push({ node: vertex1, weight });
+  }
+  public shortestPath(start: string, finish: string) {
+    // Initialization: creating a priority queue, a previous object (to trace the path)
+    // and a distances object to track the shortest distances between two vertices
+    const nodes = new PriorityQueue()
+    const distances: any = {}
+    const previous: any = {}
+    const path = []
+    let smallest
+    // Build the initial state
+    for (const vertex in this.adjacencyList) {
+      if (vertex === start) {
+        distances[vertex] = 0
+        nodes.enqueue(vertex, 0)
+      } else {
+        distances[vertex] = Infinity
+        nodes.enqueue(vertex, Infinity)
+      }
+      previous[vertex] = null
+    }
+    // The meat
+    while (nodes.values.length) {
+      smallest = nodes.dequeue()?.value
+      if (smallest) {
+        if (smallest === finish) {
+          // We are done and need to build the path to return
+          // console.log({ distances, previous });
+          while (previous[smallest]) {
+            path.push(smallest)
+            smallest = previous[smallest]
+          }
+          break
+        }
+        if (smallest || distances[smallest] !== Infinity) {
+          for (const neighbor in this.adjacencyList[smallest]) {
+            // Find neighboring node
+            const nextNode = this.adjacencyList[smallest][neighbor]
+            // Calculate the new distance to neighboring node
+            const candidate = distances[smallest] + nextNode.weight
+            const nextNeighbor = nextNode.node;
+            if (candidate < distances[nextNeighbor]) {
+              // updating the new smallest distance to neighbor
+              distances[nextNeighbor] = candidate
+              // updating the previous - How to get to the neighbor
+              previous[nextNeighbor] = smallest
+              // enqueuing in priority queue with new priority
+              nodes.enqueue(nextNeighbor, candidate)
+            }
+          }
+        }
+      }
+    }
+    return path.concat(smallest).reverse()
   }
 }
 
@@ -146,7 +199,7 @@ class PriorityQueue {
     this.sort()
   }
   public dequeue() {
-    this.values.shift()
+    return this.values.shift()
   }
   private sort() {
     this.values.sort((a, b) => a.priority - b.priority)
@@ -170,3 +223,5 @@ weightedGraph.addEdge("D", "E", 3)
 weightedGraph.addEdge("F", "E", 1)
 
 console.log(weightedGraph.adjacencyList)
+
+console.log(weightedGraph.shortestPath("A", "E"))
