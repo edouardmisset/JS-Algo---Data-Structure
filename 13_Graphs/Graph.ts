@@ -136,6 +136,23 @@ class WeightedGraph {
   }
 }
 
+class PriorityQueue {
+  public values: { value: string, priority: number }[]
+  constructor() {
+    this.values = []
+  }
+  public enqueue(value: string, priority: number) {
+    this.values.push({ value, priority })
+    this.sort()
+  }
+  public dequeue() {
+    this.values.shift()
+  }
+  private sort() {
+    this.values.sort((a, b) => a.priority - b.priority)
+  }
+}
+
 const weightedGraph = new WeightedGraph()
 weightedGraph.addVertex("A")
 weightedGraph.addVertex("B")
