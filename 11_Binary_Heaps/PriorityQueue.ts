@@ -12,7 +12,7 @@ class PrioNode {
   constructor(public value: number | string = 0, public priority: number = 0) { }
 }
 
-class PriorityQueue {
+export class PriorityQueue {
   public values: PrioNode[];
   constructor() {
     this.values = [];
