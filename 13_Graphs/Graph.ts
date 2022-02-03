@@ -122,6 +122,14 @@ class Graph {
 // console.log(graph.breadthFirstSearch('A'));
 
 
+/**
+ * 
+ * 
+ *  
+*/
+
+import { PriorityQueue } from "../11_Binary_Heaps/PriorityQueue.ts";
+
 class WeightedGraph {
   public adjacencyList: any;
   constructor() {
@@ -189,22 +197,22 @@ class WeightedGraph {
   }
 }
 
-class PriorityQueue {
-  public values: { value: string, priority: number }[]
-  constructor() {
-    this.values = []
-  }
-  public enqueue(value: string, priority: number) {
-    this.values.push({ value, priority })
-    this.sort()
-  }
-  public dequeue() {
-    return this.values.shift()
-  }
-  private sort() {
-    this.values.sort((a, b) => a.priority - b.priority)
-  }
-}
+// class BasicPriorityQueue {
+//   public values: { value: string, priority: number }[]
+//   constructor() {
+//     this.values = []
+//   }
+//   public enqueue(value: string, priority: number) {
+//     this.values.push({ value, priority })
+//     this.sort()
+//   }
+//   public dequeue() {
+//     return this.values.shift()
+//   }
+//   private sort() {
+//     this.values.sort((a, b) => a.priority - b.priority)
+//   }
+// }
 
 const weightedGraph = new WeightedGraph()
 weightedGraph.addVertex("A")
@@ -223,5 +231,14 @@ weightedGraph.addEdge("D", "E", 3)
 weightedGraph.addEdge("F", "E", 1)
 
 console.log(weightedGraph.adjacencyList)
+// this.adjacencyList {
+// A: [ { node: "B", weight: 4 }, { node: "C", weight: 2 } ],
+// B: [ { node: "A", weight: 4 }, { node: "E", weight: 3 } ],
+// C: [ { node: "A", weight: 2 }, { node: "D", weight: 2 }, { node: "F", weight: 4 } ],
+// D: [ { node: "C", weight: 2 }, { node: "F", weight: 1 }, { node: "E", weight: 3 } ],
+// E: [ { node: "B", weight: 3 }, { node: "D", weight: 3 }, { node: "F", weight: 1 } ],
+// F: [ { node: "C", weight: 4 }, { node: "D", weight: 1 }, { node: "E", weight: 1 } ]
+// }
 
 console.log(weightedGraph.shortestPath("A", "E"))
+// [ "A", "C", "D", "F", "E" ]
