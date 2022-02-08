@@ -17,10 +17,22 @@ function fibonacci(number: number): number {
 }
 // Time Complexity O(2^n) | Space Complexity: O(1)
 
-console.log(fibonacci(5))
+console.log(fibonacci(9))
+
+// Fibonacci with Memoization
+// Top down approach
+function fibMemo(number: number, memo: number[] = []): number {
+  if (memo[number] !== undefined) return memo[number]
+  if (number <= 2) return 1
+  memo[number] = fibMemo(number - 1, memo) + fibMemo(number - 2, memo)
+  return memo[number]
+}
+// Time Complexity O(n) | Space Complexity: O(n)
+
+console.log(fibMemo(9));
 
 // Fibonacci with Memoization no recursion
-// Tabulated Version
+// Tabulated Version (bottom up)
 function fib(number: number): number {
   if (number <= 2) return 1
   const fibNumbers: number[] = [0, 1, 1]
@@ -31,6 +43,6 @@ function fib(number: number): number {
 }
 // Time Complexity O(n) | Space Complexity: O(n)
 
-console.log(fib(2));
+console.log(fib(9));
 
 // 
