@@ -105,6 +105,6 @@ const prioQ = new PriorityQueue();
 prioQ.enqueue('common cold', 5);
 prioQ.enqueue('high fever', 3);
 prioQ.enqueue('gunshot wound', 1);
-console.log(prioQ);
+// console.log(prioQ);
 prioQ.dequeue();
-console.log(prioQ);
+// console.log(prioQ);
